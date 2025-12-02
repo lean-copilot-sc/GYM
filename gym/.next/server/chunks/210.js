@@ -1,0 +1,1 @@
+"use strict";exports.id=210,exports.ids=[210],exports.modules={68210:(e,t,r)=>{r.r(t),r.d(t,{AppShell:()=>s});let s=(0,r(2772).createProxy)(String.raw`C:\Work\Projects\Extra\gym_management\gym\src\components\layout\AppShell.tsx#AppShell`)}};

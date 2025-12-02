@@ -1,0 +1,182 @@
+service: gym-management-backend
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment:
+    MONGO_URI: ${env:MONGO_URI}
+    JWT_SECRET: ${env:JWT_SECRET}
+
+plugins:
+  - serverless-offline
+
+functions:
+  health:
+    handler: src/handlers/health.handler
+    events:
+      - httpApi:
+          path: /health
+          method: get
+
+  authLogin:
+    handler: src/handlers/auth/login.handler
+    events:
+      - httpApi:
+          path: /auth/login
+          method: post
+
+  authRegister:
+    handler: src/handlers/auth/register.handler
+    events:
+      - httpApi:
+          path: /auth/register
+          method: post
+
+  attendanceCheckin:
+    handler: src/handlers/attendance/checkin.handler
+    events:
+      - httpApi:
+          path: /attendance/checkin
+          method: post
+
+  attendanceCheckout:
+    handler: src/handlers/attendance/checkout.handler
+    events:
+      - httpApi:
+          path: /attendance/checkout
+          method: post
+
+  attendanceList:
+    handler: src/handlers/attendance/list.handler
+    events:
+      - httpApi:
+          path: /attendance/{memberId}
+          method: get
+
+  membersList:
+    handler: src/handlers/members/list.handler
+    events:
+      - httpApi:
+          path: /members
+          method: get
+
+  membersCreate:
+    handler: src/handlers/members/create.handler
+    events:
+      - httpApi:
+          path: /members
+          method: post
+
+  membersUpdate:
+    handler: src/handlers/members/update.handler
+    events:
+      - httpApi:
+          path: /members/{id}
+          method: put
+
+  membersDelete:
+    handler: src/handlers/members/remove.handler
+    events:
+      - httpApi:
+          path: /members/{id}
+          method: delete
+
+  workoutPlanCreate:
+    handler: src/handlers/workoutPlans/create.handler
+    events:
+      - httpApi:
+          path: /workout-plan
+          method: post
+
+  workoutPlanGet:
+    handler: src/handlers/workoutPlans/get.handler
+    events:
+      - httpApi:
+          path: /workout-plan/{memberId}
+          method: get
+
+  therapyPlanCreate:
+    handler: src/handlers/therapyPlans/create.handler
+    events:
+      - httpApi:
+          path: /therapy-plan
+          method: post
+
+  therapyPlanGet:
+    handler: src/handlers/therapyPlans/get.handler
+    events:
+      - httpApi:
+          path: /therapy-plan/{memberId}
+          method: get
+
+  appointmentsCreate:
+    handler: src/handlers/appointments/create.handler
+    events:
+      - httpApi:
+          path: /appointments
+          method: post
+
+  appointmentsList:
+    handler: src/handlers/appointments/list.handler
+    events:
+      - httpApi:
+          path: /appointments
+          method: get
+
+  paymentsCreate:
+    handler: src/handlers/payments/create.handler
+    events:
+      - httpApi:
+          path: /payments
+          method: post
+
+  paymentsList:
+    handler: src/handlers/payments/list.handler
+    events:
+      - httpApi:
+          path: /payments/{memberId}
+          method: get
+
+  progressCreate:
+    handler: src/handlers/progress/create.handler
+    events:
+      - httpApi:
+          path: /progress
+          method: post
+
+  progressList:
+    handler: src/handlers/progress/list.handler
+    events:
+      - httpApi:
+          path: /progress/{memberId}
+          method: get
+
+  dashboardAdmin:
+    handler: src/handlers/dashboard/admin.handler
+    events:
+      - httpApi:
+          path: /dashboard/admin
+          method: get
+
+  dashboardTrainer:
+    handler: src/handlers/dashboard/trainer.handler
+    events:
+      - httpApi:
+          path: /dashboard/trainer
+          method: get
+
+  dashboardPhysio:
+    handler: src/handlers/dashboard/physio.handler
+    events:
+      - httpApi:
+          path: /dashboard/physio
+          method: get
+
+  dashboardMember:
+    handler: src/handlers/dashboard/member.handler
+    events:
+      - httpApi:
+          path: /dashboard/member
+          method: get
